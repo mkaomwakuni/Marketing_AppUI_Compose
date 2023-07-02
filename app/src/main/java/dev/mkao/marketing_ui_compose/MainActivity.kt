@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,8 +54,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Contents()
-
-                    SearchBar()
                 }
             }
         }
@@ -64,11 +63,28 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun Contents() {
         val taskList = listOf("Account Opening", "Receipt Processing", "Account Verification","Loan Processing")
-        val taskFlows = listOf("Applicant History", "Loans", "Insurance","Sacco")
+        val taskFlows = listOf("Applicant History", "Mobile Banking", "Health Insurance","Sacco")
 
         Scaffold(
             backgroundColor = colorResource(id = R.color.seal),
             topBar = {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 1.dp)
+                        .statusBarsPadding() // Add padding for status bar
+                ) {
+                    Spacer(modifier = Modifier.height(1.dp)) // Add space between status bar and app name
+                    Text(
+                        text = "Chama App", // App name
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp)) // Add space between status bar and app name
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -83,7 +99,7 @@ class MainActivity : ComponentActivity() {
                             color = Color.DarkGray
                         )
                         Text(
-                            text = "Felister Winters",
+                            text = "Karisa Kaingu",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black
@@ -92,7 +108,7 @@ class MainActivity : ComponentActivity() {
                     }
                     Box() {
                         Image(
-                            painterResource(id = R.drawable.ic_launcher_background),
+                            painterResource(id = R.drawable.user),
                             contentDescription = "User Pic",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
@@ -128,10 +144,12 @@ class MainActivity : ComponentActivity() {
                     backgroundColor = colorResource(id = R.color.seal)
                 ) {
                     BottomNavigationItem(
-                        selected = true, onClick = { /*TODO*/ }, icon = {
+                        selected = true, onClick = {}, icon = {
+                            val selected = true
                             Icon(
                                 imageVector = Icons.Filled.Home,
-                                contentDescription = "Home Page"
+                                contentDescription = "Home Page" ,
+                                tint = if (selected) Color.Black else Color.LightGray
                             )
                         })
                     BottomNavigationItem(
@@ -232,7 +250,9 @@ class MainActivity : ComponentActivity() {
                         FlowItem(item)
 
                         if (index<item.lastIndex){
-                            Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(horizontal = 16.dp).padding(top = 16.dp))
+                            Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier
+                                .padding(horizontal = 16.dp)
+                                .padding(top = 16.dp))
                         }
                     }
                 }
@@ -258,7 +278,7 @@ class MainActivity : ComponentActivity() {
                     fontWeight = FontWeight.Bold,
                     fontSize = 22.sp
                 )
-                Text(text = "4 mins ago", color = Color.LightGray, fontFamily = FontFamily.Serif, fontSize = 12.sp)
+                Text(text = "4 mins ago", color = Color.DarkGray, fontFamily = FontFamily.Serif, fontSize = 12.sp)
             }
             //right sect
             IconButton(onClick = { /*TODO*/ }, modifier = Modifier
@@ -276,7 +296,7 @@ class MainActivity : ComponentActivity() {
 
         Box(modifier = Modifier
             .width(200.dp)
-            .background(color = Color.Transparent )) {
+            .background(color = Color.Transparent)) {
             Column(modifier = Modifier.padding(20.dp), verticalArrangement = Arrangement.Center) {
                 Box(modifier = Modifier
                     .clip(RoundedCornerShape(10.dp)),
@@ -345,11 +365,11 @@ fun ItemsRow() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
-                .clip(RoundedCornerShape(20.dp)),
+                .clip(RoundedCornerShape(18.dp)),
             value = textstate.value, onValueChange = { textstate.value = it },
             //icon - Leading Icon
             leadingIcon = {
-                Icon(imageVector = Icons.Filled.Search, contentDescription = "search icon")
+                Icon(imageVector = Icons.Filled.Search, contentDescription = "search icon", tint = Color.Gray)
             },
 
             colors = TextFieldDefaults.textFieldColors(
