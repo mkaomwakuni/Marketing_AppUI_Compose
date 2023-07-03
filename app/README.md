@@ -10,7 +10,6 @@ The Marketing App is a mobile application developed for small companies made usi
 - Analytics and Reports: Generates detailed reports and analytics to gain insights into marketing performance and customer behavior.
 
 ## Getting Started
-
 ### Prerequisites
 
 - Android Studio 4.0 or higher
